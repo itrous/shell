@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config xmlns="http://v8.1c.ru/v8/tech-log">
+
+		<log location="/media/public/technologs/calls" history="48">
+		
+		<event>
+			<eq property="name" value="CALL"/> 
+			<ge property="Duration" value="1000"/> 
+		</event>
+		
+		<property name="all"/>
+		
+	</log>
+	
+		<log location="/media/public/technologs/err" history="96">
+
+		<event>
+			<eq property="name" value="ATTN"/>
+		</event>
+
+		<event>
+			<eq property="name" value="ADMIN"/>
+		</event>
+
+		<event>
+			<eq property="name" value="PROC"/>
+		</event>
+
+		<event>
+			<eq property="name" value="QERR"/>
+		</event>
+
+		<event>
+			<eq property="name" value="EXCP"/>
+		</event>
+
+		<event>
+			<eq property="name" value="EXCPCNTX"/>
+		</event>
+
+		<event>
+			<eq property="name" value="CLSTR"/>
+		</event>
+
+		<event>
+			<eq property="name" value="TLOCK"/>
+			<ne property="WaitConnections" value=""/>
+		</event>
+		
+		<event>
+			<eq property="name" value="CALL"/>
+			<ne property="RetExcp" value=""/>
+		</event>
+
+		<property name="all"/>
+	</log>
+
+	<log location="/media/public/technologs/query2" history="24">
+		
+		<event>
+			<eq property="name" value="DBPOSTGRS"/> 
+			<ge property="Duration" value="1000"/> 
+		</event>
+		<property name="DataBase"/>
+		<property name="Trans"/>
+		<property name="sql"/>
+		
+	</log>
+
+	<log location="/media/public/technologs/sdbl" history="24">
+		
+		<event>
+			<eq property="name" value="SDBL"/> 
+			<ge property="Duration" value="1000"/> 
+		</event>
+		<property name="all"/>
+		
+	</log>
+</config>

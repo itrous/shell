@@ -18,6 +18,14 @@ installer_path="$1"
 # Получаем имя сервера из второго параметра
 server_name="$2"
 
+# Извлекаем версию из имени файла
+NEW_VERSION=$(basename "$installer_path" | grep -oP '\d+\.\d+\.\d+\.\d+')
+
+if [ -z "$NEW_VERSION" ]; then
+  echo "Не удалось определить версию из имени файла $installer_path"
+  exit 1
+fi
+
 # Копируем установочный файл и скрипт на удаленный сервер
 scp "$installer_path" ubuntu@"$server_name":~/
 scp 1c-install.sh ubuntu@"$server_name":~/

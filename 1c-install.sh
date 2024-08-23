@@ -82,3 +82,7 @@ systemctl enable srv1cv8-$new_version@service
 systemctl start srv1cv8-$new_version@service.service
 
 systemctl status srv1cv8-$new_version@service.service
+
+# Удаляем установочный файл после завершения установки
+rm -f "$installer_path"
+echo "Установочный файл удален: $installer_path"

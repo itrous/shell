@@ -15,20 +15,21 @@ fi
 # Получаем путь к установочному файлу из параметра
 installer_path="$1"
 
-# Получаем список серверов из второго параметра
-server_list="$2"
+# Проверяем, передан ли параметр -web
+web_mode=false
+web_server_list=""
+if [[ "$2" == "-web" ]]; then
+  web_mode=true
+  web_server_list="$3"
+else
+  # Получаем список серверов из второго параметра
+  server_list="$2"
+fi
 
 # Проверяем, передан ли параметр -debug
 debug_flag=""
-if [[ "$3" == "-debug" ]]; then
+if [[ "$3" == "-debug" || "$4" == "-debug" ]]; then
   debug_flag="-debug"
-fi
-
-# Проверяем, передан ли параметр -web
-web_mode=false
-if [[ "$4" == "-web" ]]; then
-  web_mode=true
-  web_server_list="$5"
 fi
 
 # Извлекаем версию из имени файла

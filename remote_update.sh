@@ -50,6 +50,9 @@ for server in "${SERVERS[@]}"; do
     # Копируем установочный файл на веб-сервер
     scp "$installer_path" ubuntu@"$server":~/docker/web/
 
+    # Устанавливаем права на выполнение
+    ssh ubuntu@"$server" "chmod 751 ~/docker/web/$(basename "$installer_path")"
+
     # Выполняем команды на веб-сервере
     ssh ubuntu@"$server" "
       cd ~/docker/web/ &&
@@ -57,6 +60,9 @@ for server in "${SERVERS[@]}"; do
       docker compose build &&
       docker compose up -d
     "
+
+    # Удаляем установочный файл после использования
+    ssh ubuntu@"$server" "rm -f ~/docker/web/$(basename "$installer_path")"
 
     echo "Обновление веб-сервера $server завершено."
   else

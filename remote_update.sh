@@ -18,6 +18,12 @@ installer_path="$1"
 # Получаем имя сервера из второго параметра
 server_name="$2"
 
+# Проверяем, передан ли параметр -debug
+debug_flag=""
+if [[ "$3" == "-debug" ]]; then
+  debug_flag="-debug"
+fi
+
 # Извлекаем версию из имени файла
 NEW_VERSION=$(basename "$installer_path" | grep -oP '\d+\.\d+\.\d+\.\d+')
 
@@ -30,5 +36,5 @@ fi
 scp "$installer_path" ubuntu@"$server_name":~/
 scp 1c-install.sh ubuntu@"$server_name":~/
 
-# Выполняем скрипт на удаленном сервере, передавая путь к установочному файлу
-ssh ubuntu@"$server_name" "sudo bash ~/1c-install.sh ~/$(basename "$installer_path")"
+# Выполняем скрипт на удаленном сервере, передавая путь к установочному файлу и флаг отладки, если он есть
+ssh ubuntu@"$server_name" "sudo bash ~/1c-install.sh ~/$(basename "$installer_path") $debug_flag"

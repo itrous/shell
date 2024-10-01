@@ -105,7 +105,7 @@ source $ZSH/oh-my-zsh.sh
 alias ll="ls -lah"
 alias dc="docker compose"
 alias zshc="mate ~/.zshrc"
-alias o="oscrypt"
+alias o="oscript"
 
 alias gs='git status'
 alias gph='git push'
